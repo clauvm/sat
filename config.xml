@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<widget xmlns = "http://www.w3.org/ns/widgets"
+	xmlns:gap 	= "http://phonegap.com/ns/1.0"
+	id			= "com.phonegap.sate"
+	version 	= "1.0.0"
+	versionCode = "10">
+
+	<preference name="phonegap-version" value="cli-5.2.0" />
+	<name>SatDeslizamiento</name>
+	<description>
+		Sistema de alerta temprana para deslizamientos
+	</description>
+
+	<author href="http://clau.com" email="c@c.com">
+		Claudia Vaquera 
+	</author>
+	<icon src="icon.png" />
+	<preference name="android-build-tool" value="gradle" />
+	<plugin name="phonegap-plugin-push" source="npm" spec="~1.4.5">
+		<param name="SENDER_ID" value="195582634716" />
+	</plugin>
+</widget>
