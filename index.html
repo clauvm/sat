@@ -1,37 +1,32 @@
 <!DOCTYPE html>
 <html>
   <head>
-<title>Hello World</title>
-<script type="text/javascript" src="cordova.js"></script>
-<script type="text/javascript" src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
-<script type="text/javascript">
-// document.addEventListener("deviceready",onDeviceReady,false);
-// function onDeviceReady(){
-// alert("Device Ready")
-// var push = PushNotification.init({ "android": {"senderID": "195582634716"},
-// "ios": {"alert": "true", "badge": "true", "sound": "true"}, "windows": {} } );
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title>SAT</title>
 
-// push.on('registration', function(data) {
-// console.log(data.registrationId);
-// $("#gcm_id").html(data.registrationId);
-// });
+    <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
 
-// push.on('notification', function(data) {
-// console.log(data.message);
-// alert(data.title+" Message: " +data.message);
-// // data.title,
-// // data.count,
-// // data.sound,
-// // data.image,
-// // data.additionalData
-// });
+    <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+    <link href="css/ionic.app.css" rel="stylesheet">
+    -->
 
-// push.on('error', function(e) {
-// console.log(e.message);
-// });
-// }
+    <!-- ionic/angularjs js -->
+    <script src="lib/ionic/js/ionic.bundle.js"></script>
+    <script src="lib/ionic/js/angular/angular-resource.js"></script>
+    <script src="lib/jquery/dist/jquery.js"></script>
+    <script src="js/mqttws31.js"></script>
 
+    <!-- cordova script (this will be a 404 during development) -->
+    <script src="cordova.js"></script>
 
+    <!-- your app's js -->
+    <script src="js/app.js"></script>
+    <script src="js/controllers.js"></script>
+    <script src="js/services.js"></script>
+    <script src="http://www.hivemq.com/demos/websocket-client/js/mqttws31.js" type="text/javascript"></script>
+    <script type="text/javascript">
     var hola;
     var client = new Messaging.Client("test.mosquitto.org", 8080, "myclientid_" + parseInt(Math.random() * 100, 10));
 //Connect Options
@@ -83,11 +78,30 @@ var options = {
      }
  };
  client.connect(options);
+
 </script>
-</head>
-<body>
+  </head>
+  <body ng-app="starter">
+    <!--
+      The nav bar that will be updated as we navigate between views.
+    -->
+    <ion-nav-bar class="bar-stable">
+      <ion-nav-back-button>Hola
+      </ion-nav-back-button>
+    </ion-nav-bar>
+    <!--
+      The views will be rendered in the <ion-nav-view> directive below
+      Templates are in the /templates folder (but you could also
+      have templates inline in this html file if you'd like).
+    -->
+    <div class="bar bar-header">
+      <ion-nav-view id="cabecera">
+    </div>
+    <ion-nav-view></ion-nav-view>
 <h1>Push Notification Example</h1>
 Your GCM ID : <br/>
 <p id="gcm_id"></p>
-</body>
+
+
+  </body>
 </html>
