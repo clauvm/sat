@@ -6,9 +6,9 @@
 	versionCode = "10">
 
 	<preference name="phonegap-version" value="cli-5.2.0" />
-	<name>SatDeslizamiento</name>
+	<name>SatDeslizamiento 2</name>
 	<description>
-		Sistema de alerta temprana para deslizamientos
+		Sistema de alerta temprana para deslizamientos prueba 2
 	</description>
 
 	<author href="http://clau.com" email="c@c.com">
