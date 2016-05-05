@@ -27,38 +27,39 @@
     <script src="js/services.js"></script>
     <script src="http://www.hivemq.com/demos/websocket-client/js/mqttws31.js" type="text/javascript"></script>
     <script type="text/javascript">
-//     var client = new Messaging.Client("test.mosquitto.org", 8080, "myclientid_" + parseInt(Math.random() * 100, 10));
-// //Connect Options
- 
-//     var options = {
-//      timeout: 3,
-//      //Gets Called if the connection has sucessfully been established
-//      onSuccess: function () {
-//          //alert("Connected");
-//          // $('#estado').text('Conectado');
-//          alert("Conectado mqtt");
-//          client.subscribe('/world', {qos: 2});
-         
-//      },
-//      //Gets Called if the connection could not be established
-//      onFailure: function (message) {
-//        // $('#estado').text('Error de conexion:');
-//         // alert("Connection failed: " + message.errorMessage);
-//      }
-//  };
-//  client.connect(options);
+    
 document.addEventListener("deviceready",onDeviceReady,false);
 function onDeviceReady(){
+var client = new Messaging.Client("test.mosquitto.org", 8080, "myclientid_" + parseInt(Math.random() * 100, 10));
+//Connect Options
+ 
+    var options = {
+     timeout: 3,
+     //Gets Called if the connection has sucessfully been established
+     onSuccess: function () {
+         //alert("Connected");
+         // $('#estado').text('Conectado');
+         alert("Conectado mqtt");
+         client.subscribe('/world', {qos: 2});
+         
+     },
+     //Gets Called if the connection could not be established
+     onFailure: function (message) {
+       // $('#estado').text('Error de conexion:');
+        // alert("Connection failed: " + message.errorMessage);
+     }
+ };
+ client.connect(options);
 alert("Device Ready")
 var push = PushNotification.init({ "android": {"senderID": "195582634716"},
 "ios": {"alert": "true", "badge": "true", "sound": "true"}, "windows": {} } );
 
 push.on('registration', function(data) {
   alert(data.registrationId);
-  // var men = new Messaging.Message(data.registrationId));
-  //    men.destinationName = 'sat/gcm';
-  //    men.qos = 2;
-  //    client.send(men);
+  var men = new Messaging.Message(data.registrationId));
+     men.destinationName = 'sat/gcm';
+     men.qos = 2;
+     client.send(men);
 console.log(data.registrationId);
 $("#gcm_id").html(data.registrationId);
 });
