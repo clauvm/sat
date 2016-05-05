@@ -49,32 +49,32 @@ var client = new Messaging.Client("test.mosquitto.org", 8080, "myclientid_" + pa
  };
  client.connect(options);
 // alert("Device Ready")
-// var push = PushNotification.init({ "android": {"senderID": "195582634716"},
-// "ios": {"alert": "true", "badge": "true", "sound": "true"}, "windows": {} } );
+var push = PushNotification.init({ "android": {"senderID": "195582634716"},
+"ios": {"alert": "true", "badge": "true", "sound": "true"}, "windows": {} } );
 
-// push.on('registration', function(data) {
-//   alert(data.registrationId);
-//   var men = new Messaging.Message(data.registrationId));
-//      men.destinationName = 'sat/gcm';
-//      men.qos = 2;
-//      client.send(men);
-// console.log(data.registrationId);
-// $("#gcm_id").html(data.registrationId);
-// });
+push.on('registration', function(data) {
+  alert(data.registrationId);
+  var men = new Messaging.Message(data.registrationId));
+     men.destinationName = 'sat/gcm';
+     men.qos = 2;
+     client.send(men);
+console.log(data.registrationId);
+$("#gcm_id").html(data.registrationId);
+});
 
-// push.on('notification', function(data) {
-// console.log(data.message);
-// alert(data.title+" Message: " +data.message);
-// // data.title,
-// // data.count,
-// // data.sound,
-// // data.image,
-// // data.additionalData
-// });
+push.on('notification', function(data) {
+console.log(data.message);
+alert(data.title+" Message: " +data.message);
+// data.title,
+// data.count,
+// data.sound,
+// data.image,
+// data.additionalData
+});
 
-// push.on('error', function(e) {
-// console.log(e.message);
-// });
+push.on('error', function(e) {
+console.log(e.message);
+});
 
 
 
@@ -85,7 +85,7 @@ var client = new Messaging.Client("test.mosquitto.org", 8080, "myclientid_" + pa
       The nav bar that will be updated as we navigate between views.
     -->
     <ion-nav-bar class="bar-stable">
-      <ion-nav-back-button>Hola
+      <ion-nav-back-button>
       </ion-nav-back-button>
     </ion-nav-bar>
     <!--
