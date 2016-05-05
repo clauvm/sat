@@ -5,6 +5,38 @@
 <script type="text/javascript" src="cordova.js"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
 <script type="text/javascript">
+// document.addEventListener("deviceready",onDeviceReady,false);
+// function onDeviceReady(){
+// alert("Device Ready")
+// var push = PushNotification.init({ "android": {"senderID": "195582634716"},
+// "ios": {"alert": "true", "badge": "true", "sound": "true"}, "windows": {} } );
+
+// push.on('registration', function(data) {
+// console.log(data.registrationId);
+// $("#gcm_id").html(data.registrationId);
+// });
+
+// push.on('notification', function(data) {
+// console.log(data.message);
+// alert(data.title+" Message: " +data.message);
+// // data.title,
+// // data.count,
+// // data.sound,
+// // data.image,
+// // data.additionalData
+// });
+
+// push.on('error', function(e) {
+// console.log(e.message);
+// });
+// }
+
+
+    var hola;
+    var client = new Messaging.Client("test.mosquitto.org", 8080, "myclientid_" + parseInt(Math.random() * 100, 10));
+//Connect Options
+ 
+
 document.addEventListener("deviceready",onDeviceReady,false);
 function onDeviceReady(){
 alert("Device Ready")
@@ -12,6 +44,8 @@ var push = PushNotification.init({ "android": {"senderID": "195582634716"},
 "ios": {"alert": "true", "badge": "true", "sound": "true"}, "windows": {} } );
 
 push.on('registration', function(data) {
+  alert(data.registrationId);
+  hola = data;
 console.log(data.registrationId);
 $("#gcm_id").html(data.registrationId);
 });
@@ -30,6 +64,25 @@ push.on('error', function(e) {
 console.log(e.message);
 });
 }
+var options = {
+     timeout: 3,
+     //Gets Called if the connection has sucessfully been established
+     onSuccess: function () {
+         //alert("Connected");
+         // $('#estado').text('Conectado');
+         client.subscribe('/world', {qos: 2});
+         var men = new Messaging.Message(hola);
+     men.destinationName = 'sat/gcm';
+     men.qos = 2;
+     client.send(men);
+     },
+     //Gets Called if the connection could not be established
+     onFailure: function (message) {
+       // $('#estado').text('Error de conexion:');
+        // alert("Connection failed: " + message.errorMessage);
+     }
+ };
+ client.connect(options);
 </script>
 </head>
 <body>
