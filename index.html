@@ -51,6 +51,35 @@ var client = new Messaging.Client("test.mosquitto.org", 8080, "myclientid_" + pa
  document.addEventListener("deviceReady",onDeviceReady,false);
  function onDeviceReady(){
   alert("entro");
+  var push = PushNotification.init({
+    android: {
+        senderID: "195582634716"
+    },
+    ios: {
+        alert: "true",
+        badge: "true",
+        sound: "true"
+    },
+    windows: {}
+});
+
+push.on('registration', function(data) {
+  alert(data.registrationId);
+    // data.registrationId
+});
+
+push.on('notification', function(data) {
+    // data.message,
+    // data.title,
+    // data.count,
+    // data.sound,
+    // data.image,
+    // data.additionalData
+});
+
+push.on('error', function(e) {
+    // e.message
+});
  }
 // alert("Device Ready")
 // var push = PushNotification.init({ "android": {"senderID": "195582634716"},
